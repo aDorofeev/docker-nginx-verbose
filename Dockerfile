@@ -20,4 +20,6 @@ RUN usermod -u 1000 nginx
 
 CMD ["docker_start_nginx.sh"]
 
+STOPSIGNAL SIGTERM
+
 EXPOSE 80
