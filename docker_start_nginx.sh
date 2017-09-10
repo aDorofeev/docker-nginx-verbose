@@ -10,7 +10,7 @@ _term() {
 trap _term SIGTERM
 
 echo "Starging nginx...";
-nginx -g "daemon off" &
+nginx &
 
 CHILD_NGINX_PID=$!
 wait "$CHILD_NGINX_PID"
