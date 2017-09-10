@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Updating error pgages..."
+
 DIR=$(dirname $0)
 source "$DIR/http_error_codes.sh"
 
@@ -28,3 +30,4 @@ for HTTP_CODE in "${!HTTP_CODE_LIST[@]}" ; do
 HEREDOC
 done
 
+echo "Done."
