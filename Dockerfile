@@ -4,6 +4,7 @@ RUN install_packages nginx nginx-extras
 
 RUN rm -f /etc/nginx/conf.d/default.conf
 RUN mkdir -p /etc/nginx/sites-enabled && mkdir -p /etc/nginx/sites-available
+RUM rm -f /etc/nginx/sites-enabled/*
 
 ADD nginx.conf /etc/nginx/
 
