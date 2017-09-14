@@ -1,7 +1,9 @@
-FROM nginx
+FROM bitnami/minideb:stretch
+
+RUN install_packages nginx nginx-extras
 
 RUN rm -f /etc/nginx/conf.d/default.conf
-RUN mkdir /etc/nginx/sites-enabled && mkdir /etc/nginx/sites-available
+RUN mkdir -p /etc/nginx/sites-enabled && mkdir -p /etc/nginx/sites-available
 
 ADD nginx.conf /etc/nginx/
 
@@ -16,7 +18,7 @@ ADD docker_start_nginx.sh /usr/local/bin
 RUN /usr/local/bin/make_error_inc.sh
 RUN /usr/local/bin/make_error_pages.sh
 
-RUN usermod -u 1000 nginx
+RUN usermod -u 1000 www-data
 
 CMD ["docker_start_nginx.sh"]
 
