@@ -1,6 +1,12 @@
 FROM bitnami/minideb:stretch
 
-RUN install_packages nginx nginx-extras
+RUN install_packages gnupg2 curl ca-certificates
+
+RUN curl https://nginx.ru/keys/nginx_signing.key | apt-key add -
+RUN echo 'deb http://nginx.org/packages/mainline/debian/ stretch nginx' >> '/etc/apt/sources.list.d/nginx.org.list' && \
+    echo 'deb-src http://nginx.org/packages/mainline/debian/ stretch nginx' >> '/etc/apt/sources.list.d/nginx.org.list'
+
+RUN install_packages nginx nginx-module-perl
 
 RUN rm -f /etc/nginx/conf.d/default.conf
 RUN mkdir -p /etc/nginx/sites-enabled && mkdir -p /etc/nginx/sites-available
