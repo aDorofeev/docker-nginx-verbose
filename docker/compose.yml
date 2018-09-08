@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+    nginx:
+        build: ./nginx
+        image: adorofeev/nginx-verbose:devel
+        environment:
+            # nginx-verbose
+            - DOCKER_HOST_HOSTNAME=${DOCKER_HOST_HOSTNAME}
+    test-site:
+        build: ./test-site
+        expose:
+            - 80
+        volumes:
+            - ../test-site/public:/var/www/test-site:rw
+        environment:
+            # nginx-verbose
+            - DOCKER_HOST_HOSTNAME=${DOCKER_HOST_HOSTNAME}
+            # nginx-proxy
+            - VIRTUAL_HOST=${VIRTUAL_HOST}
+            - VIRTUAL_NETWORK=nginx-proxy
+            - VIRTUAL_PORT=80
+            - LETSENCRYPT_HOST=${VIRTUAL_HOST}
+            - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+            - HTTPS_METHOD=${HTTPS_METHOD}
+        networks:
+            - default
+            - nginx-proxy
+
+networks:
+    nginx-proxy:
+        external: true

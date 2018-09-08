@@ -1,0 +1,5 @@
+/.env
+/test-site/public/*
+
+# keep .gitkeep files
+!/**/.gitkeep

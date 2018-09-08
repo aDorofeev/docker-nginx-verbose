@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR=$(dirname $0)
-source "$DIR/http_error_codes.sh"
+source "$DIR/http-error-codes.sh"
 
 INC_FILE_PATH="/etc/nginx/detailed_errors.conf.inc"
 
