@@ -9,6 +9,6 @@ find /etc/nginx/sites-available/ -name '*.nginx.tpl' | \
 
 find /etc/nginx/sites-available/ -name '*.nginx' | \
   xargs -i bash -c \
-    'FILENAME=$(basename {}); cd /etc/nginx/sites-enabled; ln -s "../sites-available/${FILENAME}" "${FILENAME}"'
+    'FILENAME=$(basename {}); cd /etc/nginx/sites-enabled; rm -f "${FILENAME}"; ln -s "../sites-available/${FILENAME}" "${FILENAME}"'
 
 exec nginx
