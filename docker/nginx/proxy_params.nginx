@@ -1,1 +1,1 @@
-add_header 'X-Proxy-Time-${CONTAINER_ID}.${DOCKER_HOST_HOSTNAME}' $request_time;
+add_header 'X-Proxy-Time-${NGINX_SERVER_NAME}.${DOCKER_HOST_HOSTNAME}' $request_time;

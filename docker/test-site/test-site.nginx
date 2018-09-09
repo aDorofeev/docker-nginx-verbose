@@ -10,9 +10,9 @@ server {
     include detailed_errors.conf.inc;
 
     location /proxy {
+        include proxy_params;
         resolver 127.0.0.11 valid=60s;
         set $proxied_server "http://localhost:81";
-        add_header 'X-Proxy-Time-${CONTAINER_ID}.${DOCKER_HOST_HOSTNAME}' $request_time;
         proxy_pass $proxied_server;
     }
 }

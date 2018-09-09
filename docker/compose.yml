@@ -16,6 +16,7 @@ services:
         environment:
             # nginx-verbose
             - DOCKER_HOST_HOSTNAME=${DOCKER_HOST_HOSTNAME}
+            - SERVICE_NAME=test-site
             # nginx-proxy
             - VIRTUAL_HOST=${VIRTUAL_HOST}
             - VIRTUAL_NETWORK=nginx-proxy
