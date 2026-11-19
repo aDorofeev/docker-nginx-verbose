@@ -1,11 +1,10 @@
-FROM bitnami/minideb:buster
+FROM bitnami/minideb:trixie
 
-RUN install_packages gnupg2 curl ca-certificates
+RUN install_packages gnupg curl ca-certificates
 
-ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
-RUN curl -s https://nginx.org/keys/nginx_signing.key | apt-key add -
-RUN echo 'deb http://nginx.org/packages/mainline/debian/ buster nginx' >> '/etc/apt/sources.list.d/nginx.org.list' && \
-    echo 'deb-src http://nginx.org/packages/mainline/debian/ buster nginx' >> '/etc/apt/sources.list.d/nginx.org.list'
+# apt-key is gone since Debian 13: use a dedicated keyring referenced via signed-by
+RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | gpg --dearmor -o /usr/share/keyrings/nginx-archive-keyring.gpg && \
+    echo 'deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/mainline/debian/ trixie nginx' > /etc/apt/sources.list.d/nginx.org.list
 
 RUN install_packages nginx nginx-module-perl
 
